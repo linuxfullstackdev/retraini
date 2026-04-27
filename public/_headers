@@ -1,5 +1,0 @@
-# Only apply noindex on preview deployments
-# (Cloudflare Pages preview URLs are NOT your custom domain)
-
-/*
-  X-Robots-Tag: all

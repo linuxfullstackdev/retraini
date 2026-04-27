@@ -79,7 +79,7 @@ summaryLength = 30
 # -----------------------------------------------------------------------------
 [permalinks]
   tracks   = "/tracks/:slug/"
-  chapters = "/:sections/:slug/"
+#   chapters = "/:sections/:slug/"
 
 # -----------------------------------------------------------------------------
 # Menus — primary menu lives in data/menu.yaml so we can render a 2-level
