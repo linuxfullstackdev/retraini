@@ -1,32 +1,26 @@
 ---
-# -----------------------------------------------------------------------------
-# Chapter archetype — a single lesson page inside a course.
-# Place at: content/tracks/<track>/<course>/chapter-NN.md
-# -----------------------------------------------------------------------------
 title: "Same Direction Pointers"
-date: 2026-04-26T12:59:01+05:30
+date: 2026-04-27T10:02:00+05:30
 draft: false
 type: "chapters"
+weight: 2
+order: 2
 
-# --- Chapter meta ------------------------------------------------------------
-order: 1                   # used to sort chapters numerically
 estimatedMinutes: 12
-summary: "What the learner will walk away with after this chapter."
-tags: []
+summary: "Both pointers move forward together, commonly used for in-place array modifications like removing duplicates or shifting elements."
 
-# --- SEO ---------------------------------------------------------------------
-description: "Concise description for search engines and social previews."
-keywords: ["chapter", "lesson"]
-author: "Tech Tutorials Team"
+tags: ["two pointers"]
+
+description: "Master same direction pointers for problems like remove duplicates, move zeroes, and in-place array transformations."
+keywords: ["chapter", "two pointers", "same direction pointers"]
+
+author: "Retraini Trainer"
 canonical: ""
 ogImage: "/images/og-default.png"
 ogType: "article"
 twitterCard: "summary_large_image"
 
-# --- Visual theme ------------------------------------------------------------
-# Available themes:
-#   orange | lime | sky | lavender | peach | mint | rose | coral | butter | sand
-theme: "mint"
+theme: "lavender"
 ---
 
 ## Introduction

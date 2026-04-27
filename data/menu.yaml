@@ -16,7 +16,7 @@ primary:
     url:  "/tracks/"
     children:
       - name: "Complete DSA Mastery"
-        url:  "/tracks/complete-dsa-mastery/"
+        url:  "/tracks/data-structures-and-algorithms/"
       - name: "Web Performance"
         url:  "/tracks/web-performance/"
       - name: "System Design"

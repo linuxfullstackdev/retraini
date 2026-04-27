@@ -1,30 +1,23 @@
 ---
-title: "Two-Pointer Algorithms"
-date: 2026-01-20
+title: "Two Pointers"
+date: 2026-04-27T10:00:00+05:30
 draft: false
 type: "courses"
+weight: 1
 
-summary: "Solve sorted-array and string problems in O(n) time using two coordinated indices."
+summary: "A technique that uses two indices to traverse arrays or strings efficiently, reducing time complexity from O(n²) to O(n) in many problems."
 level: "Beginner"
-estimatedHours: 4
-chapterCount: 3
-prerequisites: ["Arrays basics", "Big-O notation"]
-tags: ["arrays", "two-pointer", "patterns"]
+estimatedHours: 5
+chapterCount: 4
+prerequisites: ["Arrays basics"]
+tags: ["two pointers"]
 
-description: "Master the two-pointer pattern with worked examples covering pair sums, reversing strings, and removing duplicates from sorted arrays."
-keywords: ["two pointer", "algorithm patterns", "arrays", "interview prep"]
-author: "Tech Tutorials Team"
+description: "Learn the two pointers technique with patterns like opposite direction, same direction, and fast slow pointers for solving array and string problems efficiently."
+keywords: ["two pointers technique", "array algorithms", "pointer techniques"]
+author: "Retraini Trainer"
+canonical: ""
 ogImage: "/images/og-default.png"
 ogType: "website"
 
 theme: "lavender"
 ---
-
-## About this course
-
-The two-pointer pattern is one of the most useful tools in your algorithmic
-toolbox. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
-at tellus a turpis tincidunt aliquet. Curabitur eget tortor at velit
-fermentum porta.
-
-Below is a placeholder list of chapters — start with the first.

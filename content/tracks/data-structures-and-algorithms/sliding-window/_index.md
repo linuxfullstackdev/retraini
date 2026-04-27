@@ -1,34 +1,25 @@
 ---
-# -----------------------------------------------------------------------------
-# Course archetype — a course belongs to a track.
-# Place at: content/tracks/<track-slug>/<course-slug>/_index.md
-# A course contains multiple chapters as page bundles or markdown files.
-# -----------------------------------------------------------------------------
 title: "Sliding Window"
-date: 2026-04-26T13:06:22+05:30
+date: 2026-04-27T10:10:00+05:30
 draft: false
 type: "courses"
+weight: 2
 
-# --- Course meta -------------------------------------------------------------
-summary: "A technique that processes a subset (window) of elements in a list or string by moving it incrementally instead of recomputing from scratch.
-It is used to optimize problems involving contiguous subarrays, often reducing time complexity from O(n²) to O(n)."
+summary: "Process subsets of arrays or strings using a moving window to avoid redundant computations and achieve optimal time complexity."
 level: "Intermediate"
 estimatedHours: 6
-chapterCount: 0
-prerequisites: []          # e.g. ["Arrays basics", "Big-O notation"]
-tags: []
+chapterCount: 4
+prerequisites: ["Arrays basics", "Two pointers"]
+tags: ["sliding window"]
 
-# --- SEO ---------------------------------------------------------------------
-description: "sliding window technique, subarray problems, two pointers technique"
-keywords: ["course", "tutorial"]
-author: "Tech Tutorials Team @ Retraini"
+description: "Learn sliding window techniques including fixed size, variable size, and optimized window patterns using hash maps and deques."
+keywords: ["sliding window technique", "subarray problems", "two pointers window"]
+author: "Retraini Trainer"
 canonical: ""
+
 ogImage: "/images/og-default.png"
 ogType: "website"
 
-# --- Visual theme ------------------------------------------------------------
-# Available themes:
-#   orange | lime | sky | lavender | peach | mint | rose | coral | butter | sand | neutral
 theme: "lavender"
 ---
 

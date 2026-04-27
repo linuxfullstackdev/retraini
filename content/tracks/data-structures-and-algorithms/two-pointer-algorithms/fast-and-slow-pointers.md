@@ -1,32 +1,26 @@
 ---
-# -----------------------------------------------------------------------------
-# Chapter archetype — a single lesson page inside a course.
-# Place at: content/tracks/<track>/<course>/chapter-NN.md
-# -----------------------------------------------------------------------------
-title: "Fast and Slow Pointers"
-date: 2026-04-26T12:59:07+05:30
+title: "Fast & Slow Pointers"
+date: 2026-04-27T10:03:00+05:30
 draft: false
 type: "chapters"
+weight: 3
+order: 3
 
-# --- Chapter meta ------------------------------------------------------------
-order: 1                   # used to sort chapters numerically
-estimatedMinutes: 12
-summary: "What the learner will walk away with after this chapter."
-tags: []
+estimatedMinutes: 14
+summary: "Uses two pointers moving at different speeds to detect cycles or find midpoints in linked lists."
 
-# --- SEO ---------------------------------------------------------------------
-description: "Concise description for search engines and social previews."
-keywords: ["chapter", "lesson"]
-author: "Tech Tutorials Team"
+tags: ["two pointers"]
+
+description: "Understand fast and slow pointer technique for detecting cycles, finding middle elements, and solving linked list problems."
+keywords: ["chapter", "two pointers", "fast slow pointers"]
+
+author: "Retraini Trainer"
 canonical: ""
 ogImage: "/images/og-default.png"
 ogType: "article"
 twitterCard: "summary_large_image"
 
-# --- Visual theme ------------------------------------------------------------
-# Available themes:
-#   orange | lime | sky | lavender | peach | mint | rose | coral | butter | sand
-theme: "mint"
+theme: "lavender"
 ---
 
 ## Introduction

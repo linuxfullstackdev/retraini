@@ -1,32 +1,26 @@
 ---
-# -----------------------------------------------------------------------------
-# Chapter archetype — a single lesson page inside a course.
-# Place at: content/tracks/<track>/<course>/chapter-NN.md
-# -----------------------------------------------------------------------------
 title: "Opposite Direction Pointers"
-date: 2026-04-26T12:58:49+05:30
+date: 2026-04-27T10:01:00+05:30
 draft: false
 type: "chapters"
+weight: 1
+order: 1
 
-# --- Chapter meta ------------------------------------------------------------
-order: 1                   # used to sort chapters numerically
-estimatedMinutes: 12
-summary: "What the learner will walk away with after this chapter."
-tags: []
+estimatedMinutes: 15
+summary: "Two pointers start from opposite ends and move inward, commonly used for pair sum and container problems."
 
-# --- SEO ---------------------------------------------------------------------
-description: "Concise description for search engines and social previews."
-keywords: ["chapter", "lesson"]
-author: "Tech Tutorials Team"
+tags: ["two pointers"]
+
+description: "Learn opposite direction two pointers with problems like two sum sorted, container with most water, and trapping rain water."
+keywords: ["chapter", "two pointers", "opposite direction pointers"]
+
+author: "Retraini Trainer"
 canonical: ""
 ogImage: "/images/og-default.png"
 ogType: "article"
 twitterCard: "summary_large_image"
 
-# --- Visual theme ------------------------------------------------------------
-# Available themes:
-#   orange | lime | sky | lavender | peach | mint | rose | coral | butter | sand
-theme: "mint"
+theme: "lavender"
 ---
 
 ## Introduction
