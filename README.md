@@ -314,6 +314,91 @@ The site now supports **tabbed multi-language code blocks** via shortcodes while
 
 ### Markdown usage
 
+Single Code
+
+```python
+def remove_duplicates(nums):
+    if not nums:
+        return 0
+    write = 1
+    for read in range(1, len(nums)):
+        if nums[read] != nums[read - 1]:
+            nums[write] = nums[read]
+            write += 1
+    return write
+```
+
+Multiple code tabs
+
+{{< code-tabs >}}
+{{< code-tab lang="python" title="Python" >}}
+```python
+def fib(n: int) -> int:
+    return n if n < 2 else fib(n - 1) + fib(n - 2)
+```
+{{< /code-tab >}}
+
+{{< code-tab lang="java" title="Java" >}}
+```java
+class Fib {
+    static int fib(int n) {
+        return n < 2 ? n : fib(n - 1) + fib(n - 2);
+    }
+}
+```
+{{< /code-tab >}}
+
+{{< code-tab lang="golang" title="Golang" >}}
+```golang
+func fib(n int) int {
+    if n < 2 { return n }
+    return fib(n-1) + fib(n-2)
+}
+```
+{{< /code-tab >}}
+
+{{< code-tab lang="rust" title="Rust" >}}
+```rust
+fn fib(n: u32) -> u32 {
+    if n < 2 { n } else { fib(n - 1) + fib(n - 2) }
+}
+```
+{{< /code-tab >}}
+
+{{< code-tab lang="php" title="PHP" >}}
+```php
+function fib(int $n): int {
+    return $n < 2 ? $n : fib($n - 1) + fib($n - 2);
+}
+```
+{{< /code-tab >}}
+
+{{< code-tab lang="node" title="Node.js" >}}
+```javascript
+function fib(n) {
+  return n < 2 ? n : fib(n - 1) + fib(n - 2);
+}
+module.exports = { fib };
+```
+{{< /code-tab >}}
+
+{{< code-tab lang="javascript" title="JavaScript" >}}
+```javascript
+export const fib = (n) => (n < 2 ? n : fib(n - 1) + fib(n - 2));
+```
+{{< /code-tab >}}
+{{< /code-tabs >}}
+
+
+{{< code-tabs >}}
+{{< code-tab title="Python" >}}
+```python
+def fib(n: int) -> int:
+    return n if n < 2 else fib(n - 1) + fib(n - 2)
+```
+{{< /code-tab >}}
+{{< /code-tabs >}}
+
 Use a parent `code-tabs` shortcode and one `code-tab` per language:
 
 ```markdown
@@ -374,6 +459,75 @@ export const fib = (n) => (n < 2 ? n : fib(n - 1) + fib(n - 2));
 - `javascript` or `js`
 
 > You can add more languages supported by Hugo Chroma by passing the desired `lang` value in `code-tab`.
+
+
+
+## General Markdown
+
+## A gentle introduction
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris non tortor
+a turpis fermentum porta. Curabitur eget tortor at velit fermentum porta.
+
+> **Heads up.** This is a placeholder chapter. Replace it with real content
+> when authoring your course.
+
+### Why two pointers?
+
+Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+ad minim veniam, quis nostrud exercitation ullamco laboris.
+
+<!-- Inline ad slot — placed after the first major section, above the fold. -->
+{{< ad slot="chapter-inline-1" size="responsive" >}}
+
+### A worked example
+
+Consider the classic *pair sum* problem on a sorted array:
+
+```python
+def pair_sum_sorted(nums, target):
+    """Return indices of two numbers in `nums` summing to `target`, or None."""
+    left, right = 0, len(nums) - 1
+    while left < right:
+        s = nums[left] + nums[right]
+        if s == target:
+            return (left, right)
+        if s < target:
+            left += 1
+        else:
+            right -= 1
+    return None
+```
+
+The animation below shows how the pointers converge:
+
+![Two-pointer animation placeholder](/images/placeholder-diagram.svg)
+
+### Mini chart
+
+A quick comparison of brute-force vs. two-pointer time complexity:
+
+| Approach     | Time   | Space |
+|--------------|--------|-------|
+| Brute force  | O(n²)  | O(1)  |
+| Two-pointer  | O(n)   | O(1)  |
+
+<!-- Mid-content ad slot — typically after a heavy section. -->
+{{< ad slot="chapter-inline-2" size="responsive" >}}
+
+### Going further
+
+- [Two-pointer practice problems](#)
+- [The sliding-window pattern](#)
+- [Binary search on the answer](#)
+
+## Wrap up
+
+You've seen the core idea. In the next chapter we'll apply it to strings.
+Don't forget to **mark this chapter complete** when you're done — your
+progress is saved locally in your browser.
+
+
 
 ---
 
