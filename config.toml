@@ -1,0 +1,108 @@
+# =============================================================================
+# Hugo site configuration for Tech Tutorials
+# =============================================================================
+# Run locally with:   hugo server -D
+# Build for prod:     hugo --minify
+# -----------------------------------------------------------------------------
+
+baseURL      = "https://retraini.com"
+languageCode = "en-us"
+title        = "Tech Tutorials"
+# No `theme` is set on purpose — this site is fully self-contained and uses the
+# layouts/ and static/ directories at the project root directly. Setting
+# `theme = ""` (or any non-existent value) makes Hugo's module loader try to
+# resolve a module under ./themes/ and fail with:
+#   failed to load modules: module "" not found in ".../themes"
+# So the line is intentionally omitted.
+enableRobotsTXT = true
+enableEmoji  = true
+summaryLength = 30
+
+
+[pagination]
+  pagerSize = 12
+
+# -----------------------------------------------------------------------------
+# Output formats — `JSON` is enabled on the home page so /index.json is
+# generated for the client-side search.
+# -----------------------------------------------------------------------------
+[outputs]
+  home    = ["HTML", "JSON", "RSS"]
+  section = ["HTML", "RSS"]
+
+# -----------------------------------------------------------------------------
+# Markup / Goldmark settings — allow raw HTML in markdown for ad slot comments
+# and richer chapter content.
+# -----------------------------------------------------------------------------
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    noClasses = false
+    # style = "github-dark"
+    lineNos = true
+    lineNumbersInTable = true
+    codeFences = true
+    guessSyntax = true
+    tabWidth = 2
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel   = 4
+    ordered    = false
+
+# -----------------------------------------------------------------------------
+# Site params — used as fallbacks in partials/seo.html and elsewhere.
+# -----------------------------------------------------------------------------
+[params]
+  description = "Free, in-depth technical tutorials covering data structures, algorithms, and software engineering — taught with clear explanations and worked examples."
+  keywords    = ["tutorials", "programming", "dsa", "algorithms", "data structures", "software engineering"]
+  author      = "Tech Tutorials Team"
+  ogImage     = "/images/og-default.png"
+  themeColor  = "#ffffff"
+  twitterHandle = "@techtutorials"
+  email       = "hello@example.com"
+  # Ads — set to false to globally hide all ad slots.
+  showAds     = false
+  # Used by JSON-LD Organization schema on the home page.
+  organizationName = "Tech Tutorials"
+  organizationLogo = "/images/brand/logo-large.png"
+
+# -----------------------------------------------------------------------------
+# Taxonomies — left simple; expand if you need tags/categories.
+# -----------------------------------------------------------------------------
+[taxonomies]
+  tag = "tags"
+
+# -----------------------------------------------------------------------------
+# Permalinks
+# -----------------------------------------------------------------------------
+[permalinks]
+  tracks   = "/tracks/:slug/"
+  chapters = "/:sections/:slug/"
+
+# -----------------------------------------------------------------------------
+# Menus — primary menu lives in data/menu.yaml so we can render a 2-level
+# dropdown. The entries below are kept minimal and only used as a fallback
+# when the data file is absent.
+# -----------------------------------------------------------------------------
+[[menu.footer]]
+  name = "About"
+  url  = "/about/"
+  weight = 10
+[[menu.footer]]
+  name = "Contact"
+  url  = "/contact/"
+  weight = 20
+[[menu.footer]]
+  name = "Privacy"
+  url  = "/privacy/"
+  weight = 30
+[[menu.footer]]
+  name = "Terms"
+  url  = "/terms/"
+  weight = 40
+[[menu.footer]]
+  name = "FAQ"
+  url  = "/faq/"
+  weight = 50

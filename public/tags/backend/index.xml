@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Backend on Tech Tutorials</title>
+    <link>http://localhost:1313/tags/backend/</link>
+    <description>Recent content in Backend on Tech Tutorials</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 24 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/backend/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>FastAPI REST API Fundamentals</title>
+      <link>http://localhost:1313/tracks/data-structures-and-algorithms/fastapi-rest-api/</link>
+      <pubDate>Sat, 24 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tracks/data-structures-and-algorithms/fastapi-rest-api/</guid>
+      <description>Build a clean REST API with routing, validation, and persistence patterns you can reuse in production services.</description>
+    </item>
+  </channel>
+</rss>

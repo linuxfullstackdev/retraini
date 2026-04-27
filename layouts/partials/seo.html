@@ -1,0 +1,132 @@
+{{- /* =====================================================================
+       SEO partial — emits canonical, OpenGraph, Twitter and JSON-LD tags.
+       Pulls from page front matter first and falls back to .Site.Params.
+       ===================================================================== */ -}}
+
+{{- $title       := cond .IsHome .Site.Title (printf "%s · %s" .Title .Site.Title) -}}
+{{- $description := .Params.description | default .Site.Params.description -}}
+{{- $keywords    := .Params.keywords    | default .Site.Params.keywords -}}
+{{- $author      := .Params.author      | default .Site.Params.author -}}
+{{- $canonical   := .Params.canonical   | default .Permalink -}}
+{{- $ogImage     := .Params.ogImage     | default .Site.Params.ogImage -}}
+{{- $ogImageAbs  := absURL $ogImage -}}
+{{- $ogType      := .Params.ogType      | default (cond (eq .Type "chapters") "article" "website") -}}
+{{- $twitterCard := .Params.twitterCard | default "summary_large_image" -}}
+{{- $robots      := .Params.robots      | default "index, follow" -}}
+
+<title>{{ $title }}</title>
+<meta name="title" content="{{ $title }}">
+<meta name="description" content="{{ $description }}">
+{{ with $keywords }}<meta name="keywords" content="{{ delimit . ", " }}">{{ end }}
+{{ with $author    }}<meta name="author"   content="{{ . }}">{{ end }}
+<meta name="robots" content="{{ $robots }}">
+<link rel="canonical" href="{{ $canonical }}">
+
+{{- /* OpenGraph */ -}}
+<meta property="og:site_name"   content="{{ .Site.Title }}">
+<meta property="og:title"       content="{{ $title }}">
+<meta property="og:description" content="{{ $description }}">
+<meta property="og:url"         content="{{ $canonical }}">
+<meta property="og:type"        content="{{ $ogType }}">
+<meta property="og:image"       content="{{ $ogImageAbs }}">
+<meta property="og:locale"      content="{{ replace (.Site.LanguageCode | default "en-us") "-" "_" }}">
+{{ if eq $ogType "article" }}
+  {{ with .Date }}<meta property="article:published_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}
+  {{ with .Lastmod }}<meta property="article:modified_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}
+  {{ with $author }}<meta property="article:author" content="{{ . }}">{{ end }}
+  {{ range .Params.tags }}<meta property="article:tag" content="{{ . }}">{{ end }}
+{{ end }}
+
+{{- /* Twitter */ -}}
+<meta name="twitter:card"        content="{{ $twitterCard }}">
+<meta name="twitter:title"       content="{{ $title }}">
+<meta name="twitter:description" content="{{ $description }}">
+<meta name="twitter:image"       content="{{ $ogImageAbs }}">
+{{ with .Site.Params.twitterHandle }}<meta name="twitter:site" content="{{ . }}">{{ end }}
+
+{{- /* =====================================================================
+       JSON-LD structured data — emitted based on page kind:
+         • Home          → Organization
+         • Track / Course → Course
+         • Chapter        → Article + BreadcrumbList
+       ===================================================================== */ -}}
+
+{{ if .IsHome }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": {{ .Site.Params.organizationName | default .Site.Title | jsonify }},
+  "url": {{ .Site.BaseURL | jsonify }},
+  "logo": {{ (absURL (.Site.Params.organizationLogo | default "/images/logo.png")) | jsonify }},
+  "description": {{ $description | jsonify }}
+}
+</script>
+{{ end }}
+
+{{ if or (eq .Type "tracks") (and (eq .Section "tracks") (eq .Kind "section")) }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": {{ .Title | jsonify }},
+  "description": {{ $description | jsonify }},
+  "provider": {
+    "@type": "Organization",
+    "name": {{ .Site.Title | jsonify }},
+    "sameAs": {{ .Site.BaseURL | jsonify }}
+  },
+  "url": {{ $canonical | jsonify }}
+}
+</script>
+{{ end }}
+
+{{ if eq .Type "chapters" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ .Title | jsonify }},
+  "description": {{ $description | jsonify }},
+  "image": {{ $ogImageAbs | jsonify }},
+  "author": { "@type": "Person", "name": {{ $author | jsonify }} },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ .Site.Title | jsonify }},
+    "logo": { "@type": "ImageObject", "url": {{ (absURL (.Site.Params.organizationLogo | default "/images/logo.png")) | jsonify }} }
+  },
+  "datePublished": {{ .Date.Format "2006-01-02" | jsonify }},
+  "dateModified":  {{ .Lastmod.Format "2006-01-02" | jsonify }},
+  "mainEntityOfPage": {{ $canonical | jsonify }}
+}
+</script>
+{{ end }}
+
+{{- /* BreadcrumbList for any non-home page that has ancestors. */ -}}
+{{ if and (not .IsHome) .Parent }}
+{{- $crumbs := slice -}}
+{{- $node := . -}}
+{{- range seq 1 6 -}}
+  {{- if $node -}}
+    {{- $crumbs = $crumbs | append $node -}}
+    {{- $node = $node.Parent -}}
+  {{- end -}}
+{{- end -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {{- $total := len $crumbs -}}
+    {{- range $i, $p := (sort $crumbs ".RelPermalink" "asc") }}
+    {
+      "@type": "ListItem",
+      "position": {{ add $i 1 }},
+      "name": {{ $p.Title | jsonify }},
+      "item": {{ $p.Permalink | jsonify }}
+    }{{ if lt (add $i 1) $total }},{{ end }}
+    {{- end }}
+  ]
+}
+</script>
+{{ end }}

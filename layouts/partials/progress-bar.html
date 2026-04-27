@@ -1,0 +1,16 @@
+{{- /* Reusable progress bar.
+       Pass: (dict "label" "Course name" "id" "unique-id" "total" 12)
+       JS will read data-progress-id and data-progress-total and update
+       data-progress-current + width based on localStorage. */ -}}
+{{- $label := .label -}}
+{{- $id    := .id -}}
+{{- $total := .total | default 0 -}}
+<div class="progress" data-progress-id="{{ $id }}" data-progress-total="{{ $total }}">
+  <div class="progress-head">
+    <span class="progress-label">{{ $label }}</span>
+    <span class="progress-counts"><span data-progress-current>0</span> / {{ $total }}</span>
+  </div>
+  <div class="progress-track" role="progressbar" aria-label="{{ $label }} progress" aria-valuemin="0" aria-valuemax="{{ $total }}" aria-valuenow="0">
+    <div class="progress-fill" data-progress-fill style="width:0%"></div>
+  </div>
+</div>

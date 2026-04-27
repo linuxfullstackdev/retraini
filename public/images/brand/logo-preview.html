@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retraini Brand Assets - Logo System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .color-palette {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .color-palette h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #2e27c5;
+        }
+        
+        .colors {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .color-swatch {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .swatch {
+            height: 100px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .color-info {
+            font-size: 0.9rem;
+        }
+        
+        .color-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .color-value {
+            font-family: 'Courier New', monospace;
+            color: #666;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #2e27c5;
+        }
+        
+        .section-description {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .logo-item {
+            text-align: center;
+        }
+        
+        .logo-preview {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 15px;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-preview.dark {
+            background: #1a1a1a;
+            border-color: #333;
+        }
+        
+        .logo-preview img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .logo-info {
+            font-size: 0.9rem;
+        }
+        
+        .logo-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .logo-details {
+            color: #666;
+            font-size: 0.85rem;
+        }
+        
+        .usage-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .usage-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #2e27c5;
+        }
+        
+        .usage-list {
+            list-style: none;
+        }
+        
+        .usage-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .usage-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .file-path {
+            font-family: 'Courier New', monospace;
+            background: #fff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: #2e27c5;
+        }
+        
+        .checklist {
+            background: linear-gradient(135deg, #2e27c5 0%, #16b7af 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin-top: 30px;
+        }
+        
+        .checklist h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .checklist-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 20px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .checklist-item::before {
+            content: "✓";
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            margin-right: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Retraini Brand Assets</h1>
+            <p>Complete logo system for retraini.com</p>
+        </div>
+
+        <div class="color-palette">
+            <h2>🎨 Color Palette</h2>
+            <div class="colors">
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #2e27c5;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Primary Blue (Indigo)</div>
+                        <div class="color-value">#2e27c5</div>
+                        <div class="color-value">RGB(46, 39, 197)</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch" style="background: #16b7af;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Accent Cyan</div>
+                        <div class="color-value">#16b7af</div>
+                        <div class="color-value">RGB(22, 183, 175)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎯 Icon-Only Logos</h2>
+            <p class="section-description">Square format for app icons, favicons, and social media profiles</p>
+            <div class="logo-grid">
+                <div class="logo-item">
+                    <div class="logo-preview">
+                        <img src="logo-original.png" alt="Icon 1024x1024" style="max-width: 120px;">
+                    </div>
+                    <div class="logo-info">
+                        <div class="logo-name">Original Icon</div>
+                        <div class="logo-details">1024×1024px</div>
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-preview">
+                        <img src="android-chrome-512x512.png" alt="Icon 512x512" style="max-width: 100px;">
+                    </div>
+                    <div class="logo-info">
+                        <div class="logo-name">App Icon Large</div>
+                        <div class="logo-details">512×512px</div>
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-preview">
+                        <img src="android-chrome-192x192.png" alt="Icon 192x192" style="max-width: 80px;">
+                    </div>
+                    <div class="logo-info">
+                        <div class="logo-name">App Icon Medium</div>
+                        <div class="logo-details">192×192px</div>
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-preview">
+                        <img src="apple-touch-icon.png" alt="Apple Touch Icon" style="max-width: 80px;">
+                    </div>
+                    <div class="logo-info">
+                        <div class="logo-name">Apple Touch Icon</div>
+                        <div class="logo-details">180×180px</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📝 Wordmark Logos</h2>
+            <p class="section-description">Logo with text for website headers and marketing materials</p>
+            <div class="logo-grid">
+                <div class="logo-item">
+                    <div class="logo-preview">
+                        <img src="logo-large.png" alt="Wordmark Large">
+                    </div>
+                    <div class="logo-info">
+                        <div class="logo-name">Large Wordmark</div>
+                        <div class="logo-details">367×120px</div>
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-preview">
+                        <img src="logo-header.png" alt="Wordmark Header">
+                    </div>
+                    <div class="logo-info">
+                        <div class="logo-name">Header Wordmark</div>
+                        <div class="logo-details">244×90px (Default)</div>
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-preview">
+                        <img src="logo-medium.png" alt="Wordmark Medium">
+                    </div>
+                    <div class="logo-info">
+                        <div class="logo-name">Medium Wordmark</div>
+                        <div class="logo-details">282×100px</div>
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-preview">
+                        <img src="logo-small.png" alt="Wordmark Small">
+                    </div>
+                    <div class="logo-info">
+                        <div class="logo-name">Small Wordmark</div>
+                        <div class="logo-details">204×80px</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🌓 Theme Adaptivity</h2>
+            <p class="section-description">Logos work on both light and dark backgrounds</p>
+            <div class="logo-grid">
+                <div class="logo-item">
+                    <div class="logo-preview">
+                        <img src="logo-header.png" alt="Light background">
+                    </div>
+                    <div class="logo-info">
+                        <div class="logo-name">Light Background</div>
+                        <div class="logo-details">Default appearance</div>
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-preview dark">
+                        <img src="logo-header.png" alt="Dark background">
+                    </div>
+                    <div class="logo-info">
+                        <div class="logo-name">Dark Background</div>
+                        <div class="logo-details">Automatically adjusted</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📦 Favicon Set</h2>
+            <p class="section-description">Multi-resolution favicons for browser tabs and bookmarks</p>
+            <div class="logo-grid">
+                <div class="logo-item">
+                    <div class="logo-preview">
+                        <img src="favicon-16x16.png" alt="Favicon 16x16" style="max-width: 16px; image-rendering: pixelated;">
+                    </div>
+                    <div class="logo-info">
+                        <div class="logo-name">Favicon 16×16</div>
+                        <div class="logo-details">Browser tabs</div>
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-preview">
+                        <img src="favicon-32x32.png" alt="Favicon 32x32" style="max-width: 32px;">
+                    </div>
+                    <div class="logo-info">
+                        <div class="logo-name">Favicon 32×32</div>
+                        <div class="logo-details">Retina tabs</div>
+                    </div>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-preview">
+                        <img src="favicon-48x48.png" alt="Favicon 48x48" style="max-width: 48px;">
+                    </div>
+                    <div class="logo-info">
+                        <div class="logo-name">Favicon 48×48</div>
+                        <div class="logo-details">Windows tiles</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💻 Integration Status</h2>
+            <div class="usage-section">
+                <h3>Files Installed</h3>
+                <ul class="usage-list">
+                    <li>✓ Header logo: <span class="file-path">/images/brand/logo-header.png</span></li>
+                    <li>✓ Favicon bundle: <span class="file-path">/favicon.ico</span></li>
+                    <li>✓ Apple touch icon: <span class="file-path">/images/brand/apple-touch-icon.png</span></li>
+                    <li>✓ Android icons: <span class="file-path">/images/brand/android-chrome-*.png</span></li>
+                    <li>✓ Web manifest: <span class="file-path">/manifest.webmanifest</span></li>
+                </ul>
+            </div>
+            
+            <div class="usage-section">
+                <h3>Templates Updated</h3>
+                <ul class="usage-list">
+                    <li>✓ Header template: <span class="file-path">layouts/partials/header.html</span></li>
+                    <li>✓ Head template: <span class="file-path">layouts/partials/head.html</span></li>
+                    <li>✓ Site config: <span class="file-path">config.toml</span> (title updated to "Retraini")</li>
+                    <li>✓ CSS styling: <span class="file-path">static/css/main.css</span> (responsive logo styles)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="checklist">
+            <h2>✅ Complete Asset Checklist</h2>
+            <div class="checklist-grid">
+                <div class="checklist-item">Website header logo</div>
+                <div class="checklist-item">Icon-only mark</div>
+                <div class="checklist-item">Browser favicons (6 sizes + ICO)</div>
+                <div class="checklist-item">iOS app icons (180×180)</div>
+                <div class="checklist-item">Android/PWA icons (192×192, 512×512)</div>
+                <div class="checklist-item">High-resolution variants</div>
+                <div class="checklist-item">Transparent backgrounds</div>
+                <div class="checklist-item">Theme-adaptive design</div>
+                <div class="checklist-item">Responsive CSS</div>
+                <div class="checklist-item">Web manifest</div>
+                <div class="checklist-item">All templates updated</div>
+                <div class="checklist-item">Ready for deployment</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

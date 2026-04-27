@@ -1,0 +1,16 @@
+{{- /* =====================================================================
+       Ad slot placeholder. Renders an empty div annotated with an HTML
+       comment so the integration team can swap in real ad markup later.
+       Globally disabled when site param showAds == false.
+       Usage:
+         {{ partial "ad-slot.html" (dict "slot" "sidebar-top" "size" "300x600") }}
+       ===================================================================== */ -}}
+{{- $showAds := site.Params.showAds -}}
+{{- if (or (eq $showAds nil) $showAds) -}}
+{{- $slot := .slot | default "default" -}}
+{{- $size := .size | default "responsive" -}}
+<div class="ad-slot ad-slot--{{ $size }}" data-ad-slot="{{ $slot }}" data-ad-size="{{ $size }}" aria-hidden="true">
+  <!-- AdSense slot: {{ $slot }} ({{ $size }}) -->
+  <span class="ad-slot__label">Advertisement</span>
+</div>
+{{- end -}}

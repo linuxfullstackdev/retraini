@@ -1,0 +1,20 @@
+<footer class="site-footer" role="contentinfo">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <p class="brand-name-footer">{{ .Site.Title }}</p>
+      <p class="muted small">{{ .Site.Params.description }}</p>
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer">
+      <ul>
+        {{ range .Site.Menus.footer }}
+          <li><a href="{{ .URL | relURL }}">{{ .Name }}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
+
+    <div class="footer-meta">
+      <p class="muted small">© {{ now.Year }} {{ .Site.Title }}. All content provided as-is for educational use.</p>
+    </div>
+  </div>
+</footer>

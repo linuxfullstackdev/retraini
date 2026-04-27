@@ -1,0 +1,57 @@
+{{ define "main" }}
+{{- /* Course page — lists chapters inside a course bundle. Because courses
+       live two levels deep under /tracks/, Hugo treats them as sections,
+       and chapter markdown files become .Pages of that section. */ -}}
+<div class="container two-col">
+  <section class="content">
+    <header class="page-header">
+      <p class="eyebrow">
+        {{ with .Parent }}<a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end }} · Course
+      </p>
+      <h1 class="page-title">{{ .Title }}</h1>
+      {{ with .Params.summary }}<p class="page-summary">{{ . }}</p>{{ end }}
+      <p class="page-meta muted small">
+        {{ with .Params.level }}<span>{{ . }}</span>{{ end }}
+        {{ with .Params.estimatedHours }}<span> · {{ . }}h</span>{{ end }}
+        {{ with .Params.chapterCount }}<span> · {{ . }} chapters</span>{{ end }}
+      </p>
+    </header>
+
+    {{ with .Content }}<div class="prose-body">{{ . }}</div>{{ end }}
+
+    {{ with .Params.prerequisites }}
+      <div class="prereqs">
+        <h3 class="sidebar-title">Prerequisites</h3>
+        <ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+      </div>
+    {{ end }}
+
+    {{ partial "ad-slot.html" (dict "slot" "course-top" "size" "responsive") }}
+
+    <h2 class="section-title">Chapters</h2>
+    {{ $chapters := .Pages.ByParam "order" }}
+    {{ if not $chapters }}{{ $chapters = .Pages }}{{ end }}
+    {{ if $chapters }}
+      <ol class="chapter-list">
+        {{ range $i, $c := $chapters }}
+          <li class="chapter-list-item theme-{{ $c.Params.theme | default "sky" }}" data-page-path="{{ $c.RelPermalink }}">
+            <a class="chapter-list-link" href="{{ $c.RelPermalink }}">
+              <span class="chapter-num">{{ printf "%02d" (add $i 1) }}</span>
+              <span class="chapter-meta">
+                <span class="chapter-title">{{ $c.Title }}</span>
+                {{ with $c.Params.summary }}<span class="chapter-summary muted small">{{ . }}</span>{{ end }}
+                {{ with $c.Params.estimatedMinutes }}<span class="chapter-time muted small">{{ . }} min</span>{{ end }}
+              </span>
+              <span class="chapter-status" data-progress-status>○</span>
+            </a>
+          </li>
+        {{ end }}
+      </ol>
+    {{ else }}
+      <p class="muted">Chapters coming soon.</p>
+    {{ end }}
+  </section>
+
+  {{ partial "sidebar.html" . }}
+</div>
+{{ end }}

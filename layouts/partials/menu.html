@@ -1,0 +1,31 @@
+{{- /* =====================================================================
+       Two-level dropdown nav. Source of truth: data/menu.yaml.
+       CSS handles hover-open on desktop; JS in app.js handles tap-to-open
+       on touch devices.
+       ===================================================================== */ -}}
+{{- $menu := .Site.Data.menu.primary -}}
+
+<nav id="primary-nav" class="primary-nav" aria-label="Primary">
+  <ul class="menu menu-l1">
+    {{ range $menu }}
+      {{ $hasChildren := and .children (gt (len .children) 0) }}
+      <li class="menu-item{{ if $hasChildren }} has-children{{ end }}">
+        {{ if $hasChildren }}
+          <a class="menu-link" href="{{ .url }}" aria-haspopup="true" aria-expanded="false">
+            <span>{{ .name }}</span>
+            <span class="caret" aria-hidden="true">▾</span>
+          </a>
+          <ul class="menu menu-l2" role="menu">
+            {{ range .children }}
+              <li class="menu-item">
+                <a class="menu-link" href="{{ .url }}" role="menuitem">{{ .name }}</a>
+              </li>
+            {{ end }}
+          </ul>
+        {{ else }}
+          <a class="menu-link" href="{{ .url }}">{{ .name }}</a>
+        {{ end }}
+      </li>
+    {{ end }}
+  </ul>
+</nav>

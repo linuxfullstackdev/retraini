@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Strings on Tech Tutorials</title>
+    <link>http://localhost:1313/tags/strings/</link>
+    <description>Recent content in Strings on Tech Tutorials</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 22 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/strings/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Chapter 2 — Reversing &amp; Palindromes</title>
+      <link>http://localhost:1313/tracks/chapter-2-reversing-palindromes/</link>
+      <pubDate>Thu, 22 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tracks/chapter-2-reversing-palindromes/</guid>
+      <description>Apply two pointers to strings: reversal in place and palindrome checking.</description>
+    </item>
+  </channel>
+</rss>

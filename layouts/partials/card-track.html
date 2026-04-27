@@ -1,0 +1,15 @@
+{{- /* Track card — used on the /tracks/ listing page. */ -}}
+{{- $theme := .Params.theme | default "lavender" -}}
+<a class="card card-link theme-{{ $theme }}" href="{{ .RelPermalink }}">
+  <div class="card-title-bar">
+    <h3 class="card-title">{{ .Title }}</h3>
+  </div>
+  <div class="card-body">
+    <p class="card-summary">{{ .Params.summary | default .Summary }}</p>
+    <p class="card-meta">
+      {{ with .Params.level }}<span>{{ . }}</span>{{ end }}
+      {{ with .Params.estimatedHours }}<span> · {{ . }}h</span>{{ end }}
+      {{ with .Params.courseCount }}<span> · {{ . }} courses</span>{{ end }}
+    </p>
+  </div>
+</a>

@@ -1,0 +1,38 @@
+{{- /* =====================================================================
+       Search index — emitted at /index.json by the JSON output for the home
+       page. Iterates every regular page so the client-side search has a
+       single endpoint to fetch.
+       ===================================================================== */ -}}
+{{- $pages := slice -}}
+{{- range where .Site.RegularPages "Kind" "page" -}}
+  {{- $pages = $pages | append (dict
+    "title"       .Title
+    "summary"     (.Params.summary | default .Summary | plainify)
+    "description" (.Params.description | default "")
+    "content"     (.Plain | truncate 600)
+    "url"         .RelPermalink
+    "section"     .Section
+    "type"        .Type
+    "tags"        (.Params.tags | default (slice))
+    "theme"       (.Params.theme | default "sky")
+    "date"        (.Date.Format "2006-01-02")
+  ) -}}
+{{- end -}}
+{{- /* Also include section pages so users can find tracks/courses by name. */ -}}
+{{- range where .Site.Pages "Kind" "section" -}}
+  {{- if ne .Section "" -}}
+    {{- $pages = $pages | append (dict
+      "title"       .Title
+      "summary"     (.Params.summary | default .Description | plainify)
+      "description" (.Params.description | default "")
+      "content"     (.Plain | truncate 600)
+      "url"         .RelPermalink
+      "section"     .Section
+      "type"        "section"
+      "tags"        (.Params.tags | default (slice))
+      "theme"       (.Params.theme | default "sky")
+      "date"        (.Date.Format "2006-01-02")
+    ) -}}
+  {{- end -}}
+{{- end -}}
+{{ jsonify $pages }}

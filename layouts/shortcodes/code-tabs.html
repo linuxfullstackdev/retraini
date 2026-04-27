@@ -1,0 +1,58 @@
+{{- /* Parent shortcode for multilingual code tabs.
+      Usage:
+      {{< code-tabs >}}
+        {{< code-tab lang="python" title="Python" >}}...{{< /code-tab >}}
+        {{< code-tab lang="java" title="Java" >}}...{{< /code-tab >}}
+      {{< /code-tabs >}} */ -}}
+
+{{- .Inner -}}
+{{- $tabs := .Scratch.Get "codeTabsItems" | default (slice) -}}
+{{- $count := len $tabs -}}
+
+{{- if gt $count 0 -}}
+  {{- $groupID := printf "code-tabs-%d" .Ordinal -}}
+  <section class="multi-code-tabs" data-component="multi-code-tabs" data-group-id="{{ $groupID }}">
+    <div class="multi-code-tabs__controls">
+      <div class="multi-code-tabs__tablist" role="tablist" aria-label="Code languages">
+        {{- range $index, $tab := $tabs -}}
+          {{- $tabID := printf "%s-tab-%d" $groupID $index -}}
+          {{- $panelID := printf "%s-panel-%d" $groupID $index -}}
+          <button
+            type="button"
+            id="{{ $tabID }}"
+            class="multi-code-tabs__tab {{ if eq $index 0 }}is-active{{ end }}"
+            role="tab"
+            aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}"
+            aria-controls="{{ $panelID }}"
+            tabindex="{{ if eq $index 0 }}0{{ else }}-1{{ end }}"
+            data-tab-index="{{ $index }}"
+          >{{ $tab.title }}</button>
+        {{- end -}}
+      </div>
+
+      <label class="visually-hidden" for="{{ $groupID }}-select">Select code language</label>
+      <select class="multi-code-tabs__select" id="{{ $groupID }}-select" data-code-tabs-select>
+        {{- range $index, $tab := $tabs -}}
+          <option value="{{ $index }}" {{ if eq $index 0 }}selected{{ end }}>{{ $tab.title }}</option>
+        {{- end -}}
+      </select>
+    </div>
+
+    <div class="multi-code-tabs__panels">
+      {{- range $index, $tab := $tabs -}}
+        {{- $tabID := printf "%s-tab-%d" $groupID $index -}}
+        {{- $panelID := printf "%s-panel-%d" $groupID $index -}}
+        <div
+          id="{{ $panelID }}"
+          class="multi-code-tabs__panel {{ if eq $index 0 }}is-active{{ end }}"
+          role="tabpanel"
+          aria-labelledby="{{ $tabID }}"
+          {{ if ne $index 0 }}hidden{{ end }}
+          data-tab-panel-index="{{ $index }}"
+        >
+          {{- highlight $tab.code $tab.language "lineNos=table,lineNumbersInTable=true,guessSyntax=true,tabWidth=2,noClasses=false" -}}
+        </div>
+      {{- end -}}
+    </div>
+  </section>
+{{- end -}}

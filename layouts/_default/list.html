@@ -1,0 +1,38 @@
+{{ define "main" }}
+<div class="container two-col">
+  <section class="content">
+    <header class="page-header">
+      <h1 class="page-title">{{ .Title }}</h1>
+      {{ with .Params.summary }}<p class="page-summary">{{ . }}</p>{{ end }}
+    </header>
+
+    {{ with .Content }}<div class="prose-body">{{ . }}</div>{{ end }}
+
+    {{- $pages := .Pages -}}
+    {{ if $pages }}
+      <ul class="card-list">
+        {{ range $pages }}
+          <li>
+            <a class="card card-link theme-{{ .Params.theme | default "sky" }}" href="{{ .RelPermalink }}">
+              <div class="card-title-bar">
+                <h3 class="card-title">{{ .Title }}</h3>
+              </div>
+              <div class="card-body">
+                <p class="card-summary">{{ .Params.summary | default .Summary }}</p>
+                <p class="card-meta">
+                  {{ with .Params.level }}<span>{{ . }}</span>{{ end }}
+                  {{ with .Params.estimatedHours }}<span> · {{ . }}h</span>{{ end }}
+                </p>
+              </div>
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+    {{ else }}
+      <p class="muted">Nothing here yet — check back soon.</p>
+    {{ end }}
+  </section>
+
+  {{ partial "sidebar.html" . }}
+</div>
+{{ end }}

@@ -1,0 +1,31 @@
+<svg xmlns="https://i.ytimg.com/vi/aiQcvV1vSHE/maxresdefault.jpg" viewBox="0 0 600 220" role="img" aria-labelledby="t">
+  <title id="t">Two-pointer animation placeholder</title>
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#FFE5CC"/>
+      <stop offset="1" stop-color="#DCEEFB"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="220" rx="14" fill="url(#g)"/>
+  <g font-family="Inter, sans-serif" font-size="14" fill="#3a3f4b" font-weight="300">
+    <text x="20" y="32">Diagram placeholder — replace with a real image.</text>
+  </g>
+  <g transform="translate(40,80)">
+    <g font-family="ui-monospace, Menlo, monospace" font-size="18" fill="#2d3142">
+      <rect x="0"   y="0" width="50" height="50" fill="#fff" stroke="#cfd2d8" rx="6"/>
+      <text x="25"  y="32" text-anchor="middle">1</text>
+      <rect x="60"  y="0" width="50" height="50" fill="#fff" stroke="#cfd2d8" rx="6"/>
+      <text x="85"  y="32" text-anchor="middle">3</text>
+      <rect x="120" y="0" width="50" height="50" fill="#fff" stroke="#cfd2d8" rx="6"/>
+      <text x="145" y="32" text-anchor="middle">5</text>
+      <rect x="180" y="0" width="50" height="50" fill="#fff" stroke="#cfd2d8" rx="6"/>
+      <text x="205" y="32" text-anchor="middle">7</text>
+      <rect x="240" y="0" width="50" height="50" fill="#fff" stroke="#cfd2d8" rx="6"/>
+      <text x="265" y="32" text-anchor="middle">9</text>
+    </g>
+    <g fill="#5b6cff" font-family="Inter, sans-serif" font-weight="500" font-size="13">
+      <text x="25"  y="78" text-anchor="middle">↑ left</text>
+      <text x="265" y="78" text-anchor="middle">↑ right</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,26 @@
+{{ define "main" }}
+{{- /* /tracks/ — listing of all tracks as a 3-column grid. */ -}}
+<div class="container">
+  <section class="content">
+    <header class="page-header">
+      <p>&nbsp;</p>
+      <h1 class="page-title">{{ .Title }}</h1>
+      {{ with .Params.summary }}<p class="page-summary">{{ . }}</p>{{ end }}
+    </header>
+
+    {{ with .Content }}<div class="prose-body">{{ . }}</div>{{ end }}
+
+    <ul class="grid grid-3">
+      {{ range .Sections }}
+        <li>{{ partial "card-track.html" . }}</li>
+      {{ else }}
+        {{ range where .Pages "Kind" "section" }}
+          <li>{{ partial "card-track.html" . }}</li>
+        {{ end }}
+      {{ end }}
+    </ul>
+  </section>
+
+  {{/*  {{ partial "sidebar.html" . }}  */}}
+</div>
+{{ end }}

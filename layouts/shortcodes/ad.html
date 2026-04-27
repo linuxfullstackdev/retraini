@@ -1,0 +1,7 @@
+{{- /* In-content ad shortcode. Usage in markdown:
+       {{< ad slot="chapter-inline-1" size="responsive" >}}
+       Delegates to the ad-slot partial so behavior stays in one place. */ -}}
+{{ partial "ad-slot.html" (dict
+  "slot" (.Get "slot" | default "inline")
+  "size" (.Get "size" | default "responsive")
+) }}

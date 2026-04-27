@@ -1,0 +1,16 @@
+{{- /* Course card — used on home page and track pages. The dot is a course
+       page (Hugo Page object). */ -}}
+{{- $theme := .Params.theme | default "sky" -}}
+<a class="card card-link theme-{{ $theme }}" href="{{ .RelPermalink }}">
+  <div class="card-title-bar">
+    <h3 class="card-title">{{ .Title }}</h3>
+  </div>
+  <div class="card-body">
+    <p class="card-summary">{{ .Params.summary | default .Summary }}</p>
+    <p class="card-meta">
+      {{ with .Params.level }}<span>{{ . }}</span>{{ end }}
+      {{ with .Params.estimatedHours }}<span> · {{ . }}h</span>{{ end }}
+      {{ with .Params.chapterCount }}<span> · {{ . }} chapters</span>{{ end }}
+    </p>
+  </div>
+</a>

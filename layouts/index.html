@@ -1,0 +1,65 @@
+{{ define "main" }}
+{{- /* ===========================================================
+       Home page — hero + featured courses grid
+       Hero data lives in front matter (.Params.hero)
+       ============================================================ */ -}}
+
+{{ with .Params.hero }}
+<section class="hero">
+  <div class="container narrow hero-inner">
+    {{ with .eyebrow }}<p class="hero-eyebrow">{{ . }}</p>{{ end }}
+    <h1 class="hero-title">{{ .title }}</h1>
+    {{ with .subtitle }}<p class="hero-subtitle">{{ . }}</p>{{ end }}
+    <div class="hero-cta">
+      {{ with .primaryCta }}<a class="button button-primary" href="{{ .url }}">{{ .label }}</a>{{ end }}
+      {{ with .secondaryCta }}<a class="button button-ghost" href="{{ .url }}">{{ .label }}</a>{{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+<section class="container featured">
+  <div class="section-head">
+    <h2 class="section-title">Featured courses</h2>
+    <a class="section-more" href="/tracks/">All tracks →</a>
+  </div>
+
+  <div class="grid grid-3">
+    {{ $featured := .Params.featured }}
+    {{ if $featured }}
+      {{ range $path := $featured }}
+        {{ with $.Site.GetPage $path }}
+          {{ partial "card-course.html" . }}
+        {{ end }}
+      {{ end }}
+    {{ else }}
+      {{- /* Fallback: pick first 6 course bundles found under /tracks/ */ -}}
+      {{ range first 6 (where (where .Site.RegularPages.ByDate.Reverse "Section" "tracks") "Kind" "page") }}
+        {{ partial "card-course.html" . }}
+      {{ end }}
+    {{ end }}
+  </div>
+</section>
+
+<section class="container featured">
+  <div class="section-head">
+    <h2 class="section-title">Why Tech Tutorials?</h2>
+  </div>
+  <div class="grid grid-3">
+    <div class="feature-card">
+      <h3>Calm, readable</h3>
+      <p>No autoplay videos, no popups. Just text, code, and the occasional diagram.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Worked examples</h3>
+      <p>Every algorithm comes with an annotated implementation in idiomatic Python.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Local progress</h3>
+      <p>Mark chapters complete and track your journey — all stored privately in your browser.</p>
+    </div>
+  </div>
+</section>
+
+{{ partial "ad-slot.html" (dict "slot" "home-bottom" "size" "responsive") }}
+{{ end }}

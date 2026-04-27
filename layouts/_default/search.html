@@ -1,0 +1,30 @@
+{{ define "main" }}
+<div class="container two-col">
+  <section class="content">
+    <header class="page-header">
+      <h1 class="page-title">{{ .Title }}</h1>
+      {{ with .Content }}<div class="page-summary">{{ . }}</div>{{ end }}
+    </header>
+
+    <form class="search-form" role="search" onsubmit="return false;">
+      <label class="visually-hidden" for="search-input">Search</label>
+      <input
+        id="search-input"
+        type="search"
+        autocomplete="off"
+        placeholder="Type to search every track, course and chapter…"
+        aria-label="Search"
+      >
+      <p class="muted small search-status" id="search-status" aria-live="polite">Loading search index…</p>
+    </form>
+
+    <div id="search-results" class="grid grid-2" aria-live="polite"></div>
+  </section>
+
+  {{ partial "sidebar.html" . }}
+</div>
+{{ end }}
+
+{{ define "scripts" }}
+<script src="{{ "/js/search.js" | relURL }}" defer></script>
+{{ end }}

@@ -1,0 +1,72 @@
+{{- /* Child shortcode for multilingual code tabs.
+      Must be nested inside {{< code-tabs >}}...{{< /code-tabs >}}.
+      Supports both raw shortcode bodies and fenced markdown blocks:
+      {{< code-tab title="Python" >}}
+      ```python
+      print("hello")
+      ```
+      {{< /code-tab >}} */ -}}
+
+{{- if not .Parent -}}
+  {{- errorf "The code-tab shortcode must be nested inside code-tabs. File: %s" .Position -}}
+{{- end -}}
+
+{{- $inner := trim .InnerDeindent " \n\r\t" -}}
+{{- $fencePattern := "(?s)^\\s*```([^\\n`]*)\\s*\\n([\\s\\S]*?)\\n?```\\s*$" -}}
+{{- $hasFence := gt (len (findRE $fencePattern $inner)) 0 -}}
+
+{{- $fenceLang := "" -}}
+{{- $code := $inner -}}
+{{- if $hasFence -}}
+  {{- $fenceLang = lower (trim (replaceRE $fencePattern "$1" $inner) " \n\r\t") -}}
+  {{- $code = replaceRE $fencePattern "$2" $inner -}}
+{{- end -}}
+
+{{- $paramLang := lower (.Get "lang" | default "") -}}
+{{- $rawLang := cond (ne $fenceLang "") $fenceLang $paramLang -}}
+{{- if eq $rawLang "" -}}
+  {{- $rawLang = "text" -}}
+{{- end -}}
+
+{{- $highlightLang := $rawLang -}}
+{{- if or (eq $rawLang "node") (eq $rawLang "nodejs") -}}
+  {{- $highlightLang = "javascript" -}}
+{{- else if eq $rawLang "js" -}}
+  {{- $highlightLang = "javascript" -}}
+{{- else if eq $rawLang "golang" -}}
+  {{- $highlightLang = "go" -}}
+{{- end -}}
+
+{{- $title := .Get "title" -}}
+{{- if not $title -}}
+  {{- if eq $rawLang "go" -}}
+    {{- $title = "Golang" -}}
+  {{- else if eq $rawLang "golang" -}}
+    {{- $title = "Golang" -}}
+  {{- else if eq $rawLang "js" -}}
+    {{- $title = "JavaScript" -}}
+  {{- else if eq $rawLang "node" -}}
+    {{- $title = "Node.js" -}}
+  {{- else if eq $rawLang "nodejs" -}}
+    {{- $title = "Node.js" -}}
+  {{- else if eq $rawLang "php" -}}
+    {{- $title = "PHP" -}}
+  {{- else if eq $rawLang "java" -}}
+    {{- $title = "Java" -}}
+  {{- else if eq $rawLang "rust" -}}
+    {{- $title = "Rust" -}}
+  {{- else if eq $rawLang "python" -}}
+    {{- $title = "Python" -}}
+  {{- else -}}
+    {{- $title = title $rawLang -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $tab := dict
+  "title" $title
+  "label" (lower $title)
+  "language" $highlightLang
+  "rawLanguage" $rawLang
+  "code" (trim $code " \n\r\t")
+-}}
+{{- .Parent.Scratch.Add "codeTabsItems" (slice $tab) -}}

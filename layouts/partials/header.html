@@ -1,0 +1,26 @@
+<header class="site-header" role="banner">
+  <div class="container header-inner">
+    <a class="brand" href="{{ "/" | relURL }}" aria-label="{{ .Site.Title }} home">
+      <!-- Brand logo: light/dark SVG from retraini_brand_v3.svg -->
+      <svg class="brand-logo-svg" width="130" height="32" viewBox="0 0 130 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="retraini" role="img">
+        <!-- Rising bars icon -->
+        <rect class="bar-1" x="0" y="18" width="7" height="8" rx="2"/>
+        <rect class="bar-2" x="10" y="12" width="7" height="14" rx="2"/>
+        <rect class="bar-3" x="20" y="2" width="7" height="24" rx="2"/>
+        <text class="logo-re" x="36" y="24" font-family="Inter, -apple-system, sans-serif" font-size="22" font-weight="500">re</text>
+        <text class="logo-traini" x="59" y="24" font-family="Inter, -apple-system, sans-serif" font-size="22" font-weight="400">traini</text>
+      </svg>
+    </a>
+
+    <div class="header-menu-tools">
+      {{ partial "menu.html" . }}
+      <button class="theme-toggle" type="button" aria-label="Switch to dark mode" data-theme-toggle>
+        <span aria-hidden="true" data-theme-icon>◐</span>
+      </button>
+    </div>
+
+    <button class="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>

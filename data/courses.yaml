@@ -1,0 +1,44 @@
+# =============================================================================
+# Course / chapter map used by the profile page (layouts/section/profile.html)
+# to compute completion percentages from localStorage.
+#
+# This file is the source of truth for what counts as "all chapters" for a
+# given course — it must be kept in sync with the actual content tree.
+#
+# Schema:
+#   tracks:
+#     - slug:    track URL slug (relative path under /tracks/)
+#       title:   display title
+#       theme:   pastel theme name (must match those in static/css/main.css)
+#       courses:
+#         - slug:    course URL slug
+#           title:   display title
+#           theme:   pastel theme
+#           chapters:
+#             - path: "/tracks/<track>/<course>/<chapter>/"
+#               title: "..."
+# =============================================================================
+
+tracks:
+  - slug: "complete-dsa-mastery"
+    title: "Complete DSA Mastery"
+    theme: "lavender"
+    courses:
+      - slug: "two-pointer-algorithms"
+        title: "Two-Pointer Algorithms"
+        theme: "orange"
+        chapters:
+          - path: "/tracks/complete-dsa-mastery/two-pointer-algorithms/chapter-01/"
+            title: "Chapter 1 — The Two-Pointer Mental Model"
+          - path: "/tracks/complete-dsa-mastery/two-pointer-algorithms/chapter-02/"
+            title: "Chapter 2 — Reversing & Palindromes"
+          - path: "/tracks/complete-dsa-mastery/two-pointer-algorithms/chapter-03/"
+            title: "Chapter 3 — Removing Duplicates from Sorted Arrays"
+      - slug: "fastapi-rest-api"
+        title: "FastAPI REST API Fundamentals"
+        theme: "neutral"
+        chapters:
+          - path: "/tracks/complete-dsa-mastery/fastapi-rest-api/chapter-01/"
+            title: "Chapter 1 — Project Setup and First Endpoint"
+          - path: "/tracks/complete-dsa-mastery/fastapi-rest-api/chapter-02/"
+            title: "Chapter 2 — Validation and Error Handling"

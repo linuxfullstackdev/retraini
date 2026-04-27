@@ -1,0 +1,109 @@
+{{ define "main" }}
+<div class="container two-col">
+  <section class="content">
+    <header class="page-header">
+      <h1 class="page-title">{{ .Title }}</h1>
+      {{ with .Content }}<div class="page-summary">{{ . }}</div>{{ end }}
+    </header>
+
+    <div class="settings-card profile-name-card" data-profile-name-card>
+      <span>Hi,</span>
+      <input
+        type="text"
+        class="profile-name-input"
+        data-profile-name-input
+        maxlength="32"
+        placeholder="Learner"
+        aria-label="Your name"
+      >
+      <span>! Keep up the great work!</span>
+    </div>
+
+    {{- /* Aggregate progress for the whole site at the top. */ -}}
+    <div class="profile-overall settings-card">
+      <h2 class="settings-heading">Overall progress</h2>
+      {{ $totalChapters := 0 }}
+      {{ range .Site.Data.courses.tracks }}
+        {{ range .courses }}
+          {{ $totalChapters = add $totalChapters (len .chapters) }}
+        {{ end }}
+      {{ end }}
+      {{ partial "progress-bar.html" (dict "label" "All chapters" "id" "overall" "total" $totalChapters) }}
+      <div class="profile-actions">
+        <button type="button" class="button" data-progress-clear>Reset all progress</button>
+      </div>
+    </div>
+
+    {{- /* Per-track / per-course breakdown — read from data/courses.yaml */ -}}
+    {{ range .Site.Data.courses.tracks }}
+      {{ $trackSlug := .slug }}
+      {{ $trackFallbackURL := printf "/tracks/%s/" $trackSlug }}
+      {{ $trackPage := site.GetPage $trackFallbackURL }}
+      {{ $trackURL := $trackFallbackURL }}
+      {{ $trackTitle := .title }}
+      {{ with $trackPage }}
+        {{ $trackURL = .RelPermalink }}
+        {{ $trackTitle = .Title }}
+      {{ end }}
+
+      <section class="profile-track theme-{{ .theme | default "lavender" }}">
+        <header class="profile-track-head">
+          <h2 class="profile-track-title">
+            <a href="{{ $trackURL }}">{{ $trackTitle }}</a>
+          </h2>
+        </header>
+
+        <ul class="profile-course-list">
+          {{ range .courses }}
+            {{ $courseSlug := .slug }}
+            {{ $courseId := printf "course-%s" $courseSlug }}
+            {{ $courseFallbackURL := printf "/tracks/%s/%s/" $trackSlug $courseSlug }}
+            {{ $coursePage := site.GetPage $courseFallbackURL }}
+            {{ $courseURL := $courseFallbackURL }}
+            {{ $courseTitle := .title }}
+            {{ with $coursePage }}
+              {{ $courseURL = .RelPermalink }}
+              {{ $courseTitle = .Title }}
+            {{ end }}
+
+            {{ $chapterPaths := slice }}
+            {{ range .chapters }}
+              {{ $chapterFallback := .path }}
+              {{ $chapterURL := $chapterFallback }}
+              {{ with (site.GetPage $chapterFallback) }}{{ $chapterURL = .RelPermalink }}{{ end }}
+              {{ $chapterPaths = $chapterPaths | append $chapterURL }}
+            {{ end }}
+            <li class="profile-course theme-{{ .theme | default "sky" }}" data-course-id="{{ $courseId }}" data-course-chapters="{{ delimit $chapterPaths "|" }}">
+              <a class="profile-course-link" href="{{ $courseURL }}">
+                <h3 class="profile-course-title">{{ $courseTitle }}</h3>
+              </a>
+              {{ partial "progress-bar.html" (dict "label" $courseTitle "id" $courseId "total" (len .chapters)) }}
+              <details class="profile-chapter-details">
+                <summary class="muted small">Chapters</summary>
+                <ul class="profile-chapter-list">
+                  {{ range .chapters }}
+                    {{ $chapterFallback := .path }}
+                    {{ $chapterURL := $chapterFallback }}
+                    {{ $chapterTitle := .title }}
+                    {{ with (site.GetPage $chapterFallback) }}
+                      {{ $chapterURL = .RelPermalink }}
+                      {{ $chapterTitle = .Title }}
+                    {{ end }}
+                    <li data-chapter-path="{{ $chapterURL }}">
+                      <span class="chapter-status" data-progress-status>○</span>
+                      <a href="{{ $chapterURL }}">{{ $chapterTitle }}</a>
+                    </li>
+                  {{ end }}
+                </ul>
+              </details>
+            </li>
+          {{ end }}
+        </ul>
+      </section>
+    {{ end }}
+
+  </section>
+
+  {{ partial "sidebar.html" . }}
+</div>
+{{ end }}

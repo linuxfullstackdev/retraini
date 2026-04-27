@@ -1,0 +1,39 @@
+{{ define "main" }}
+{{- /* Track page (e.g. /tracks/complete-dsa-mastery/) — shows the courses
+       inside this track as a 3-column card grid. Tracks are themselves
+       Hugo sections, so child courses are .Sections (each course is a
+       branch bundle with its own _index.md). */ -}}
+<div class="container two-col">
+  <section class="content">
+    <header class="page-header">
+      <p class="eyebrow">Learning Track</p>
+      <h1 class="page-title">{{ .Title }}</h1>
+      {{ with .Params.summary }}<p class="page-summary">{{ . }}</p>{{ end }}
+      <p class="page-meta muted small">
+        {{ with .Params.level }}<span>{{ . }}</span>{{ end }}
+        {{ with .Params.estimatedHours }}<span> · {{ . }}h estimated</span>{{ end }}
+        {{ with .Params.courseCount }}<span> · {{ . }} courses</span>{{ end }}
+      </p>
+    </header>
+
+    {{ with .Content }}<div class="prose-body">{{ . }}</div>{{ end }}
+
+    {{ partial "ad-slot.html" (dict "slot" "track-top" "size" "responsive") }}
+
+    <h2 class="section-title">Courses in this track</h2>
+
+    {{ $courses := .Sections }}
+    {{ if $courses }}
+      <div class="grid grid-3">
+        {{ range $courses }}
+          {{ partial "card-course.html" . }}
+        {{ end }}
+      </div>
+    {{ else }}
+      <p class="muted">Courses for this track are coming soon.</p>
+    {{ end }}
+  </section>
+
+  {{ partial "sidebar.html" . }}
+</div>
+{{ end }}

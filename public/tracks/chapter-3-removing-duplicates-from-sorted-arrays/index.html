@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en-us" data-page-theme="lavender" data-theme="light">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light">
+<meta name="generator" content="Hugo"><title>Chapter 3 — Removing Duplicates from Sorted Arrays · Tech Tutorials</title>
+<meta name="title" content="Chapter 3 — Removing Duplicates from Sorted Arrays · Tech Tutorials">
+<meta name="description" content="Solve the classic remove-duplicates-from-sorted-array problem in O(n) time and O(1) space using a read/write pair of pointers.">
+<meta name="keywords" content="two pointer, in-place, dedupe, sorted arrays">
+<meta name="author"   content="Tech Tutorials Team">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="http://localhost:1313/tracks/chapter-3-removing-duplicates-from-sorted-arrays/"><meta property="og:site_name"   content="Tech Tutorials">
+<meta property="og:title"       content="Chapter 3 — Removing Duplicates from Sorted Arrays · Tech Tutorials">
+<meta property="og:description" content="Solve the classic remove-duplicates-from-sorted-array problem in O(n) time and O(1) space using a read/write pair of pointers.">
+<meta property="og:url"         content="http://localhost:1313/tracks/chapter-3-removing-duplicates-from-sorted-arrays/">
+<meta property="og:type"        content="article">
+<meta property="og:image"       content="http://localhost:1313/images/og-default.png">
+<meta property="og:locale"      content="en_us">
+
+  <meta property="article:published_time" content="2026-01-23T00:00:00Z">
+  <meta property="article:modified_time" content="2026-01-23T00:00:00Z">
+  <meta property="article:author" content="Tech Tutorials Team">
+  <meta property="article:tag" content="two-pointer"><meta property="article:tag" content="in-place">
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:title"       content="Chapter 3 — Removing Duplicates from Sorted Arrays · Tech Tutorials">
+<meta name="twitter:description" content="Solve the classic remove-duplicates-from-sorted-array problem in O(n) time and O(1) space using a read/write pair of pointers.">
+<meta name="twitter:image"       content="http://localhost:1313/images/og-default.png">
+<meta name="twitter:site" content="@techtutorials">
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "\"Chapter 3 — Removing Duplicates from Sorted Arrays\"",
+  "description": "\"Solve the classic remove-duplicates-from-sorted-array problem in O(n) time and O(1) space using a read/write pair of pointers.\"",
+  "image": "\"http://localhost:1313/images/og-default.png\"",
+  "author": { "@type": "Person", "name": "\"Tech Tutorials Team\"" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "\"Tech Tutorials\"",
+    "logo": { "@type": "ImageObject", "url": "\"http://localhost:1313/images/brand/logo-large.png\"" }
+  },
+  "datePublished": "\"2026-01-23\"",
+  "dateModified":  "\"2026-01-23\"",
+  "mainEntityOfPage": "\"http://localhost:1313/tracks/chapter-3-removing-duplicates-from-sorted-arrays/\""
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "\"Tech Tutorials — Learn programming the calm way\"",
+      "item": "\"http://localhost:1313/\""
+    },
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "\"Learning Tracks\"",
+      "item": "\"http://localhost:1313/tracks/\""
+    },
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "\"Chapter 3 — Removing Duplicates from Sorted Arrays\"",
+      "item": "\"http://localhost:1313/tracks/chapter-3-removing-duplicates-from-sorted-arrays/\""
+    },
+    {
+      "@type": "ListItem",
+      "position":  4 ,
+      "name": "\"Data Structures and Algorithms\"",
+      "item": "\"http://localhost:1313/tracks/data-structures-and-algorithms/\""
+    },
+    {
+      "@type": "ListItem",
+      "position":  5 ,
+      "name": "\"Two-Pointer Algorithms\"",
+      "item": "\"http://localhost:1313/tracks/data-structures-and-algorithms/two-pointer-algorithms/\""
+    }
+  ]
+}
+</script>
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/brand/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/brand/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/images/brand/favicon-48x48.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/brand/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest"><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap"
+      media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap">
+</noscript><link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/code-tabs.css"><script>
+    (function () {
+      try {
+        var defaultScale = '1.15';
+        var scale = localStorage.getItem('ttsFontScale') || defaultScale;
+        document.documentElement.style.setProperty('--user-font-scale', scale);
+
+        var savedMode = localStorage.getItem('ttsDarkMode');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var mode = (savedMode === 'dark' || savedMode === 'light') ? savedMode : (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', mode);
+      } catch (e) {   }
+    })();
+  </script>
+</head>
+<body class="layout-chapters ">
+  
+
+  <header class="site-header" role="banner">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="Tech Tutorials home">
+      
+      <svg class="brand-logo-svg" width="130" height="32" viewBox="0 0 130 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="retraini" role="img">
+        
+        <rect class="bar-1" x="0" y="18" width="7" height="8" rx="2"/>
+        <rect class="bar-2" x="10" y="12" width="7" height="14" rx="2"/>
+        <rect class="bar-3" x="20" y="2" width="7" height="24" rx="2"/>
+        <text class="logo-re" x="36" y="24" font-family="Inter, -apple-system, sans-serif" font-size="22" font-weight="500">re</text>
+        <text class="logo-traini" x="59" y="24" font-family="Inter, -apple-system, sans-serif" font-size="22" font-weight="400">traini</text>
+      </svg>
+    </a>
+
+    <div class="header-menu-tools">
+      <nav id="primary-nav" class="primary-nav" aria-label="Primary">
+  <ul class="menu menu-l1">
+    
+      
+      <li class="menu-item">
+        
+          <a class="menu-link" href="/">Home</a>
+        
+      </li>
+    
+      
+      <li class="menu-item has-children">
+        
+          <a class="menu-link" href="/tracks/" aria-haspopup="true" aria-expanded="false">
+            <span>Tracks</span>
+            <span class="caret" aria-hidden="true">▾</span>
+          </a>
+          <ul class="menu menu-l2" role="menu">
+            
+              <li class="menu-item">
+                <a class="menu-link" href="/tracks/complete-dsa-mastery/" role="menuitem">Complete DSA Mastery</a>
+              </li>
+            
+              <li class="menu-item">
+                <a class="menu-link" href="/tracks/web-performance/" role="menuitem">Web Performance</a>
+              </li>
+            
+              <li class="menu-item">
+                <a class="menu-link" href="/tracks/system-design/" role="menuitem">System Design</a>
+              </li>
+            
+              <li class="menu-item">
+                <a class="menu-link" href="/tracks/" role="menuitem">All tracks →</a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      
+      <li class="menu-item has-children">
+        
+          <a class="menu-link" href="#" aria-haspopup="true" aria-expanded="false">
+            <span>Topics</span>
+            <span class="caret" aria-hidden="true">▾</span>
+          </a>
+          <ul class="menu menu-l2" role="menu">
+            
+              <li class="menu-item">
+                <a class="menu-link" href="/tags/algorithms/" role="menuitem">Algorithms</a>
+              </li>
+            
+              <li class="menu-item">
+                <a class="menu-link" href="/tags/data-structures/" role="menuitem">Data Structures</a>
+              </li>
+            
+              <li class="menu-item">
+                <a class="menu-link" href="/tags/patterns/" role="menuitem">Patterns</a>
+              </li>
+            
+              <li class="menu-item">
+                <a class="menu-link" href="/tags/interview-prep/" role="menuitem">Interview Prep</a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      
+      <li class="menu-item">
+        
+          <a class="menu-link" href="/search/">Search</a>
+        
+      </li>
+    
+      
+      <li class="menu-item">
+        
+          <a class="menu-link" href="/profile/">Profile</a>
+        
+      </li>
+    
+      
+      <li class="menu-item">
+        
+          <a class="menu-link" href="/settings/">Settings</a>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+      <button class="theme-toggle" type="button" aria-label="Switch to dark mode" data-theme-toggle>
+        <span aria-hidden="true" data-theme-icon>◐</span>
+      </button>
+    </div>
+
+    <button class="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+  <main id="main" class="site-main" role="main"><div class="container two-col">
+  <article class="content prose chapter-page" data-page-path="/tracks/chapter-3-removing-duplicates-from-sorted-arrays/">
+
+    <nav class="breadcrumbs" aria-label="Breadcrumbs">
+      <a href="/">Home</a>
+       <span aria-hidden="true">›</span> <a href="/tracks/data-structures-and-algorithms/">Data Structures and Algorithms</a>
+       <span aria-hidden="true">›</span> <a href="/tracks/data-structures-and-algorithms/two-pointer-algorithms/">Two-Pointer Algorithms</a>
+      <span aria-hidden="true">›</span> <span aria-current="page">Chapter 3 — Removing Duplicates from Sorted Arrays</span>
+    </nav>
+
+    <header class="page-header">
+      <h1 class="page-title">Chapter 3 — Removing Duplicates from Sorted Arrays</h1>
+      <p class="page-summary">The classic in-place dedupe problem solved with the read/write two-pointer variant.</p>
+      <p class="page-meta muted small">
+        <time datetime="2026-01-23">Jan 23, 2026</time>
+         · 14 min read
+      </p>
+    </header>
+
+    
+
+    <div class="prose-body">
+      <h2 id="the-problem">The problem</h2>
+<p>Given a sorted array, modify it in place so that each element appears at most
+once and return the new length.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">remove_duplicates</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">nums</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">write</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">read</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">read</span><span class="p">]</span> <span class="o">!=</span> <span class="n">nums</span><span class="p">[</span><span class="n">read</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">nums</span><span class="p">[</span><span class="n">write</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">read</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="n">write</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">write</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="multi-code-tabs" data-component="multi-code-tabs" data-group-id="code-tabs-0">
+    <div class="multi-code-tabs__controls">
+      <div class="multi-code-tabs__tablist" role="tablist" aria-label="Code languages"><button
+            type="button"
+            id="code-tabs-0-tab-0"
+            class="multi-code-tabs__tab is-active"
+            role="tab"
+            aria-selected="true"
+            aria-controls="code-tabs-0-panel-0"
+            tabindex="0"
+            data-tab-index="0"
+          >Python</button><button
+            type="button"
+            id="code-tabs-0-tab-1"
+            class="multi-code-tabs__tab "
+            role="tab"
+            aria-selected="false"
+            aria-controls="code-tabs-0-panel-1"
+            tabindex="-1"
+            data-tab-index="1"
+          >Java</button><button
+            type="button"
+            id="code-tabs-0-tab-2"
+            class="multi-code-tabs__tab "
+            role="tab"
+            aria-selected="false"
+            aria-controls="code-tabs-0-panel-2"
+            tabindex="-1"
+            data-tab-index="2"
+          >Golang</button><button
+            type="button"
+            id="code-tabs-0-tab-3"
+            class="multi-code-tabs__tab "
+            role="tab"
+            aria-selected="false"
+            aria-controls="code-tabs-0-panel-3"
+            tabindex="-1"
+            data-tab-index="3"
+          >Rust</button><button
+            type="button"
+            id="code-tabs-0-tab-4"
+            class="multi-code-tabs__tab "
+            role="tab"
+            aria-selected="false"
+            aria-controls="code-tabs-0-panel-4"
+            tabindex="-1"
+            data-tab-index="4"
+          >PHP</button><button
+            type="button"
+            id="code-tabs-0-tab-5"
+            class="multi-code-tabs__tab "
+            role="tab"
+            aria-selected="false"
+            aria-controls="code-tabs-0-panel-5"
+            tabindex="-1"
+            data-tab-index="5"
+          >Node.js</button><button
+            type="button"
+            id="code-tabs-0-tab-6"
+            class="multi-code-tabs__tab "
+            role="tab"
+            aria-selected="false"
+            aria-controls="code-tabs-0-panel-6"
+            tabindex="-1"
+            data-tab-index="6"
+          >JavaScript</button></div>
+
+      <label class="visually-hidden" for="code-tabs-0-select">Select code language</label>
+      <select class="multi-code-tabs__select" id="code-tabs-0-select" data-code-tabs-select><option value="0" selected>Python</option><option value="1" >Java</option><option value="2" >Golang</option><option value="3" >Rust</option><option value="4" >PHP</option><option value="5" >Node.js</option><option value="6" >JavaScript</option></select>
+    </div>
+
+    <div class="multi-code-tabs__panels"><div
+          id="code-tabs-0-panel-0"
+          class="multi-code-tabs__panel is-active"
+          role="tabpanel"
+          aria-labelledby="code-tabs-0-tab-0"
+          
+          data-tab-panel-index="0"
+        ><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">n</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span></span></span></code></pre></td></tr></table>
+</div>
+</div></div><div
+          id="code-tabs-0-panel-1"
+          class="multi-code-tabs__panel "
+          role="tabpanel"
+          aria-labelledby="code-tabs-0-tab-1"
+          hidden
+          data-tab-panel-index="1"
+        ><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">Fib</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">fib</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">2</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">2</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div></div><div
+          id="code-tabs-0-panel-2"
+          class="multi-code-tabs__panel "
+          role="tabpanel"
+          aria-labelledby="code-tabs-0-tab-2"
+          hidden
+          data-tab-panel-index="2"
+        ><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="nf">fib</span><span class="p">(</span><span class="nx">n</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nf">fib</span><span class="p">(</span><span class="nx">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">fib</span><span class="p">(</span><span class="nx">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div></div><div
+          id="code-tabs-0-panel-3"
+          class="multi-code-tabs__panel "
+          role="tabpanel"
+          aria-labelledby="code-tabs-0-tab-3"
+          hidden
+          data-tab-panel-index="3"
+        ><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span>: <span class="kt">u32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">u32</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div></div><div
+          id="code-tabs-0-panel-4"
+          class="multi-code-tabs__panel "
+          role="tabpanel"
+          aria-labelledby="code-tabs-0-tab-4"
+          hidden
+          data-tab-panel-index="4"
+        ><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">function</span> <span class="nf">fib</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$n</span><span class="p">)</span><span class="o">:</span> <span class="nx">int</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nv">$n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">?</span> <span class="nv">$n</span> <span class="o">:</span> <span class="nx">fib</span><span class="p">(</span><span class="nv">$n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nx">fib</span><span class="p">(</span><span class="nv">$n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div></div><div
+          id="code-tabs-0-panel-5"
+          class="multi-code-tabs__panel "
+          role="tabpanel"
+          aria-labelledby="code-tabs-0-tab-5"
+          hidden
+          data-tab-panel-index="5"
+        ><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">fib</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">?</span> <span class="nx">n</span> <span class="o">:</span> <span class="nx">fib</span><span class="p">(</span><span class="nx">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nx">fib</span><span class="p">(</span><span class="nx">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">fib</span> <span class="p">};</span></span></span></code></pre></td></tr></table>
+</div>
+</div></div><div
+          id="code-tabs-0-panel-6"
+          class="multi-code-tabs__panel "
+          role="tabpanel"
+          aria-labelledby="code-tabs-0-tab-6"
+          hidden
+          data-tab-panel-index="6"
+        ><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">fib</span> <span class="o">=</span> <span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="nx">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">?</span> <span class="nx">n</span> <span class="o">:</span> <span class="nx">fib</span><span class="p">(</span><span class="nx">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nx">fib</span><span class="p">(</span><span class="nx">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">));</span></span></span></code></pre></td></tr></table>
+</div>
+</div></div></div>
+  </section>
+
+
+<section class="multi-code-tabs" data-component="multi-code-tabs" data-group-id="code-tabs-1">
+    <div class="multi-code-tabs__controls">
+      <div class="multi-code-tabs__tablist" role="tablist" aria-label="Code languages"><button
+            type="button"
+            id="code-tabs-1-tab-0"
+            class="multi-code-tabs__tab is-active"
+            role="tab"
+            aria-selected="true"
+            aria-controls="code-tabs-1-panel-0"
+            tabindex="0"
+            data-tab-index="0"
+          >Python</button></div>
+
+      <label class="visually-hidden" for="code-tabs-1-select">Select code language</label>
+      <select class="multi-code-tabs__select" id="code-tabs-1-select" data-code-tabs-select><option value="0" selected>Python</option></select>
+    </div>
+
+    <div class="multi-code-tabs__panels"><div
+          id="code-tabs-1-panel-0"
+          class="multi-code-tabs__panel is-active"
+          role="tabpanel"
+          aria-labelledby="code-tabs-1-tab-0"
+          
+          data-tab-panel-index="0"
+        ><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">n</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span></span></span></code></pre></td></tr></table>
+</div>
+</div></div></div>
+  </section>
+<p>This is the <em>read/write</em> variant of two pointers — one pointer scans the
+input while the other tracks where to write the next unique element.</p>
+<!-- Inline ad slot. -->
+
+
+<h2 id="where-to-next">Where to next?</h2>
+<p>You&rsquo;ve finished a complete worked example using the two-pointer pattern.
+Continue to the next course in this track to see how the same idea
+generalizes to sliding windows.</p>
+
+    </div>
+
+    <div class="chapter-complete-cta">
+      <button type="button" class="button button-primary" data-mark-complete data-page-path="/tracks/chapter-3-removing-duplicates-from-sorted-arrays/">
+        ✓ Mark as complete
+      </button>
+      <p class="muted small" data-progress-status>Saved locally to your browser.</p>
+    </div>
+
+    
+      
+      
+      
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+          
+        
+      
+      <nav class="chapter-nav" aria-label="Chapter navigation">
+        
+          <a class="chapter-nav-prev" href="/tracks/chapter-2-reversing-palindromes/" rel="prev">
+            <span class="muted small">← Previous</span>
+            <span class="chapter-nav-title">Chapter 2 — Reversing &amp; Palindromes</span>
+          </a>
+        
+        <span></span>
+      </nav>
+    
+
+  </article>
+
+  <aside class="sidebar" aria-label="Sidebar">
+  <div class="sidebar-sticky"><div class="sidebar-block progress-widget" data-progress-widget>
+        <h4 class="sidebar-title">Your progress</h4>
+        <p class="muted small" data-progress-status>Not yet complete.</p>
+        <button type="button" class="button button-block" data-mark-complete data-page-path="/tracks/chapter-3-removing-duplicates-from-sorted-arrays/">
+          Mark as complete
+        </button>
+      </div>
+
+      
+        
+        
+        <div class="sidebar-block">
+          <h4 class="sidebar-title">Chapters in this Course</h4>
+          <ul class="sidebar-link-list">
+            
+              <li>
+                <a href="/tracks/fast-and-slow-pointers/" class="">Fast and Slow Pointers</a>
+              </li>
+            
+              <li>
+                <a href="/tracks/same-direction-pointers/" class="">Same Direction Pointers</a>
+              </li>
+            
+              <li>
+                <a href="/tracks/opposite-direction-pointers/" class="">Opposite Direction Pointers</a>
+              </li>
+            
+              <li>
+                <a href="/tracks/chapter-1-the-two-pointer-mental-model/" class="">Chapter 1 — The Two-Pointer Mental Model</a>
+              </li>
+            
+              <li>
+                <a href="/tracks/chapter-2-reversing-palindromes/" class="">Chapter 2 — Reversing &amp; Palindromes</a>
+              </li>
+            
+              <li>
+                <a href="/tracks/chapter-3-removing-duplicates-from-sorted-arrays/" class="is-current">Chapter 3 — Removing Duplicates from Sorted Arrays</a>
+              </li>
+            
+          </ul>
+        </div>
+      
+
+      
+        
+        
+        
+        
+          <div class="sidebar-block">
+            <h4 class="sidebar-title">Other Courses</h4>
+            <ul class="sidebar-link-list">
+              
+                <li><a href="/tracks/data-structures-and-algorithms/sliding-window/">Sliding Window</a></li>
+              
+                <li><a href="/tracks/data-structures-and-algorithms/fastapi-rest-api/">FastAPI REST API Fundamentals</a></li>
+              
+            </ul>
+          </div>
+        
+      
+    
+
+    
+
+    <div class="sidebar-block" data-recently-viewed hidden>
+      <h4 class="sidebar-title">Recently viewed</h4>
+      <ul class="recently-viewed-list" data-recently-viewed-list></ul>
+    </div>
+
+    
+
+  </div>
+</aside>
+
+</div>
+</main>
+
+  <footer class="site-footer" role="contentinfo">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <p class="brand-name-footer">Tech Tutorials</p>
+      <p class="muted small">Free, in-depth technical tutorials covering data structures, algorithms, and software engineering — taught with clear explanations and worked examples.</p>
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer">
+      <ul>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/contact/">Contact</a></li>
+        
+          <li><a href="/privacy/">Privacy</a></li>
+        
+          <li><a href="/terms/">Terms</a></li>
+        
+          <li><a href="/faq/">FAQ</a></li>
+        
+      </ul>
+    </nav>
+
+    <div class="footer-meta">
+      <p class="muted small">© 2026 Tech Tutorials. All content provided as-is for educational use.</p>
+    </div>
+  </div>
+</footer>
+<script src="/js/app.js" defer></script>
+  <script src="/js/code-tabs.js" defer></script>
+  <script src="/js/progress.js" defer></script>
+  <script src="/js/settings.js" defer></script></body>
+</html>

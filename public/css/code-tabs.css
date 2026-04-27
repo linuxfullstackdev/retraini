@@ -1,0 +1,104 @@
+/* Multi-language code tabs (Hugo shortcode: code-tabs + code-tab) */
+
+.multi-code-tabs {
+  margin: 1.35rem 0;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  background: var(--c-code-bg);
+  overflow: hidden;
+}
+
+.multi-code-tabs__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .65rem;
+  padding: .6rem .7rem;
+  background: var(--c-bg-soft);
+  border-bottom: 1px solid var(--c-border);
+}
+
+.multi-code-tabs__tablist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+}
+
+.multi-code-tabs__tab {
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--c-text-soft);
+  font: inherit;
+  font-size: .78rem;
+  line-height: 1;
+  padding: .4rem .72rem;
+  cursor: pointer;
+}
+
+.multi-code-tabs__tab:hover {
+  color: var(--c-accent);
+  border-color: var(--c-border-strong);
+  background: var(--c-surface);
+}
+
+.multi-code-tabs__tab.is-active {
+  color: var(--c-text-strong);
+  background: var(--c-surface);
+  border-color: var(--c-border-strong);
+  box-shadow: var(--shadow-sm);
+}
+
+.multi-code-tabs__select {
+  display: none;
+  background: var(--c-surface);
+  color: var(--c-text-strong);
+  border: 1px solid var(--c-border-strong);
+  border-radius: 8px;
+  font: inherit;
+  font-size: .82rem;
+  line-height: 1.2;
+  padding: .35rem .5rem;
+}
+
+.multi-code-tabs__panel {
+  display: none;
+}
+
+.multi-code-tabs__panel.is-active {
+  display: block;
+}
+
+.multi-code-tabs__panel > .highlight {
+  margin: 0;
+  border-radius: 0;
+}
+
+.multi-code-tabs__panel > .highlight pre {
+  border-radius: 0;
+}
+
+/* Keep copy button layout intact with existing global code styles */
+.multi-code-tabs .code-block-wrap {
+  margin: 0;
+}
+
+html[data-theme="dark"] .multi-code-tabs {
+  background: #0f172a;
+}
+
+html[data-theme="dark"] .multi-code-tabs__controls {
+  background: #111827;
+}
+
+@media (max-width: 860px) {
+  .multi-code-tabs__tablist {
+    display: none;
+  }
+
+  .multi-code-tabs__select {
+    display: inline-flex;
+    width: 100%;
+  }
+}

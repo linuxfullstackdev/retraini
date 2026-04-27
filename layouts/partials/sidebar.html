@@ -1,0 +1,65 @@
+{{- /* =====================================================================
+       Right-hand sidebar. Sticky once user scrolls past the header.
+       Renders ad slots and a placeholder "Recently viewed" widget that is
+       populated by static/js/app.js from localStorage.
+       ===================================================================== */ -}}
+<aside class="sidebar" aria-label="Sidebar">
+  <div class="sidebar-sticky">
+
+    {{- /* On chapter pages, show progress + in-course navigation widgets. */ -}}
+    {{ if eq .Type "chapters" }}
+      {{- $course := .Parent -}}
+      {{- $track := false -}}
+      {{- with $course }}{{ with .Parent }}{{ $track = . }}{{ end }}{{ end -}}
+
+      <div class="sidebar-block progress-widget" data-progress-widget>
+        <h4 class="sidebar-title">Your progress</h4>
+        <p class="muted small" data-progress-status>Not yet complete.</p>
+        <button type="button" class="button button-block" data-mark-complete data-page-path="{{ .RelPermalink }}">
+          Mark as complete
+        </button>
+      </div>
+
+      {{ with $course }}
+        {{ $chapters := .Pages.ByParam "order" }}
+        {{ if not $chapters }}{{ $chapters = .Pages }}{{ end }}
+        <div class="sidebar-block">
+          <h4 class="sidebar-title">Chapters in this Course</h4>
+          <ul class="sidebar-link-list">
+            {{ range $chapters }}
+              <li>
+                <a href="{{ .RelPermalink }}" class="{{ if eq .RelPermalink $.RelPermalink }}is-current{{ end }}">{{ .Title }}</a>
+              </li>
+            {{ end }}
+          </ul>
+        </div>
+      {{ end }}
+
+      {{ with $track }}
+        {{ $currentCourseLink := "" }}
+        {{ with $course }}{{ $currentCourseLink = .RelPermalink }}{{ end }}
+        {{ $otherCourses := where .Sections "RelPermalink" "ne" $currentCourseLink }}
+        {{ if gt (len $otherCourses) 0 }}
+          <div class="sidebar-block">
+            <h4 class="sidebar-title">Other Courses</h4>
+            <ul class="sidebar-link-list">
+              {{ range $otherCourses }}
+                <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+              {{ end }}
+            </ul>
+          </div>
+        {{ end }}
+      {{ end }}
+    {{ end }}
+
+    {{ partial "ad-slot.html" (dict "slot" "sidebar-top" "size" "300x250") }}
+
+    <div class="sidebar-block" data-recently-viewed hidden>
+      <h4 class="sidebar-title">Recently viewed</h4>
+      <ul class="recently-viewed-list" data-recently-viewed-list></ul>
+    </div>
+
+    {{ partial "ad-slot.html" (dict "slot" "sidebar-bottom" "size" "300x600") }}
+
+  </div>
+</aside>

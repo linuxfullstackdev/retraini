@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}" data-page-theme="{{ .Params.theme | default "sky" }}" data-theme="light">
+<head>
+  {{- /* All <head> tags live in partials/head.html, including SEO and font preconnects. */ -}}
+  {{ partial "head.html" . }}
+
+  {{- /* Apply persisted UI state BEFORE first paint to avoid flashes. */ -}}
+  <script>
+    (function () {
+      try {
+        var defaultScale = '1.15';
+        var scale = localStorage.getItem('ttsFontScale') || defaultScale;
+        document.documentElement.style.setProperty('--user-font-scale', scale);
+
+        var savedMode = localStorage.getItem('ttsDarkMode');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var mode = (savedMode === 'dark' || savedMode === 'light') ? savedMode : (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', mode);
+      } catch (e) { /* localStorage unavailable — ignore */ }
+    })();
+  </script>
+</head>
+<body class="layout-{{ .Type | default "page" }} {{ if .IsHome }}is-home{{ end }}">
+  {{/*  <a class="skip-link" href="#main">Skip to content</a>  */}}
+
+  {{ partial "header.html" . }}
+
+  <main id="main" class="site-main" role="main">
+    {{- block "main" . }}{{ end -}}
+  </main>
+
+  {{ partial "footer.html" . }}
+
+  {{- /* App-wide JS — vanilla, no framework, all deferred. */ -}}
+  <script src="{{ "/js/app.js" | relURL }}" defer></script>
+  <script src="{{ "/js/code-tabs.js" | relURL }}" defer></script>
+  <script src="{{ "/js/progress.js" | relURL }}" defer></script>
+  <script src="{{ "/js/settings.js" | relURL }}" defer></script>
+  {{- block "scripts" . }}{{ end -}}
+</body>
+</html>
