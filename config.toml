@@ -18,6 +18,10 @@ enableRobotsTXT = true
 enableEmoji  = true
 summaryLength = 30
 
+[services.googleAnalytics]
+  id = 'G-RD179W392E'
+
+
 
 [pagination]
   pagerSize = 12

@@ -25,5 +25,8 @@ theme: "lavender"
 
 ## Introduction
 
-Place a brief intro here. Each chapter typically contains: text, diagrams,
-code snippets, and links. See the placeholder examples below.
+Welcome to the chapter on Same Direction Pointers in Two Pointer Algorithms. This chapter will guide you through the concept, use cases, and implementation of same direction pointers.
+
+Same Direction Pointers are a technique used in solving problems where two pointers move in the same direction to achieve a specific goal efficiently.
+
+
