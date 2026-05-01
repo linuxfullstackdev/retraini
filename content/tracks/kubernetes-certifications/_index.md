@@ -10,7 +10,7 @@ draft: false
 type: "tracks"
 
 # --- Track meta --------------------------------------------------------------
-summary: "One-line tagline shown on the tracks listing card."
+summary: "Coming Soon"
 level: "Beginner → Advanced"
 estimatedHours: 40
 courseCount: 0             # auto-display only; informational
