@@ -1,7 +1,7 @@
 ---
 title: "Cloud Infrastructure"
 date: 2026-05-05T10:50:00+05:30
-draft: true
+draft: false
 type: "courses"
 weight: 6
 
