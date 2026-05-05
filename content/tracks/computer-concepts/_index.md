@@ -10,13 +10,15 @@ draft: false
 type: "tracks"
 
 # --- Track meta --------------------------------------------------------------
-summary: "Coming Soon"
+summary: "Go beyond coding and understand how software runs, communicates, and scales in real systems.
+Master the core concepts behind OS, networking, databases, and system design."
 level: "Beginner → Advanced"
 estimatedHours: 40
 courseCount: 0             # auto-display only; informational
 
 # --- SEO ---------------------------------------------------------------------
-description: "What learners will achieve after completing this track."
+description: "Learn how systems actually work beneath your code—from operating systems to distributed systems and cloud infrastructure.
+Build the mental models needed to design, debug, and scale real-world applications."
 keywords: ["track", "curriculum"]
 author: "Tech Tutorials Team"
 canonical: ""
@@ -29,5 +31,5 @@ ogType: "website"
 theme: "lime"
 ---
 
-A short overview of the track. The content below is shown above the courses
-grid on the track page.
+
+This track covers the core concepts that every software engineer should understand beyond just coding. These topics explain how systems actually work under the hood—how programs execute, how data flows across networks, how databases scale, and how modern applications are deployed and secured.
