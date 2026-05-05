@@ -7,7 +7,7 @@
 
 baseURL      = "https://retraini.com"
 languageCode = "en-us"
-title        = "Tech Tutorials"
+title        = "Tech Tutorials by Retraini"
 # No `theme` is set on purpose — this site is fully self-contained and uses the
 # layouts/ and static/ directories at the project root directly. Setting
 # `theme = ""` (or any non-existent value) makes Hugo's module loader try to

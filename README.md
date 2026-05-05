@@ -88,7 +88,7 @@ tech_tut_site/
 │   ├── index.html           # home page layout
 │   ├── index.json           # search index (emitted at /index.json)
 │   ├── partials/            # head, seo, header, menu, footer, sidebar, ad-slot, cards
-│   ├── shortcodes/          # {{< ad >}} etc.
+│   ├── shortcodes/          # {{< ad >}} {{< grid cols="3" >}} etc.
 │   ├── tracks/              # list (all tracks) + single (one track)
 │   ├── courses/             # single (one course)
 │   └── chapters/            # single (chapter content page)
@@ -512,8 +512,24 @@ A quick comparison of brute-force vs. two-pointer time complexity:
 | Brute force  | O(n²)  | O(1)  |
 | Two-pointer  | O(n)   | O(1)  |
 
+
+
+### Shortcodes
+
 <!-- Mid-content ad slot — typically after a heavy section. -->
 {{< ad slot="chapter-inline-2" size="responsive" >}}
+
+Grids upto 3 boxes per row works. If you need only one, just use cols=1
+``` go
+{{< grid cols="3" >}}
+  {{< feature title="Calm, readable" >}}
+    No autoplay videos, no popups. Just text, code, and the occasional diagram.
+  {{< /feature >}}
+  {{< feature title="Worked examples" >}}
+    Every algorithm comes with an annotated implementation in idiomatic Python.
+  {{< /feature >}}
+{{< /grid >}}
+```
 
 ### Going further
 

@@ -1,0 +1,8 @@
+<div class="slider-item">
+  <div class="slider-card" style="display: flex; flex-direction: column; overflow: hidden;">
+    <h3 style="flex-shrink: 0;">{{ .Get "title" }}</h3>
+    <div class="slider-content" style="flex-grow: 1; overflow-y: auto; overflow-x: hidden;">
+      {{ .Inner | markdownify }}
+    </div>
+  </div>
+</div>
