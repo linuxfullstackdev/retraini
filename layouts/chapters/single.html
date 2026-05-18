@@ -26,6 +26,8 @@
     {{ partial "ad-slot.html" (dict "slot" "chapter-top" "size" "responsive") }}
 
     <div class="prose-body">
+      {{ .TableOfContents }}
+ 
       {{ .Content }}
     </div>
 

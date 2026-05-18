@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode | default "en" }}" data-page-theme="{{ .Params.theme | default "sky" }}" data-theme="light">
+<html lang="{{ .Site.Language.Locale | default "en" }}" data-page-theme="{{ .Params.theme | default "sky" }}" data-theme="light">
 <head>
   {{- /* All <head> tags live in partials/head.html, including SEO and font preconnects. */ -}}
   {{ partial "head.html" . }}

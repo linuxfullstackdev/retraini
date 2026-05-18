@@ -23,7 +23,7 @@
     <div class="profile-overall settings-card">
       <h2 class="settings-heading">Overall progress</h2>
       {{ $totalChapters := 0 }}
-      {{ range .Site.Data.courses.tracks }}
+      {{ range hugo.Data.courses.tracks }}
         {{ range .courses }}
           {{ $totalChapters = add $totalChapters (len .chapters) }}
         {{ end }}
@@ -35,7 +35,7 @@
     </div>
 
     {{- /* Per-track / per-course breakdown — read from data/courses.yaml */ -}}
-    {{ range .Site.Data.courses.tracks }}
+    {{ range hugo.Data.courses.tracks }}
       {{ $trackSlug := .slug }}
       {{ $trackFallbackURL := printf "/tracks/%s/" $trackSlug }}
       {{ $trackPage := site.GetPage $trackFallbackURL }}

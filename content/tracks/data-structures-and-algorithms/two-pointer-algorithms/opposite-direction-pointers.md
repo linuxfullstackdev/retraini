@@ -62,17 +62,6 @@ This pattern shows up again and again:
     1. [Merge two sorted arrays](#merge-two-sorted-arrays)
     2. [Intersection of sorted arrays](#intersection-of-sorted-arrays)
 
-{{< grid cols="3" >}}
-  {{< feature title="Calm, readable" >}}
-    No autoplay videos, no popups. Just text, code, and the occasional diagram.
-  {{< /feature >}}
-  {{< feature title="Worked examples" >}}
-    Every algorithm comes with an annotated implementation in idiomatic Python.
-  {{< /feature >}}
-  {{< feature title="Worked examples" >}}
-    Every algorithm comes with an annotated implementation in idiomatic Python.
-  {{< /feature >}}
-{{< /grid >}}
 
 ### Two Sum (sorted array) {#two-sum-sorted-array}
 
